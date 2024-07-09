@@ -113,7 +113,3 @@ class TestDistributedRides:
 
         with allure.step(f"Check that output for {request_file} matches {expected_output}"):
             assert_that(sorted(result)).is_equal_to(sorted(expected_output))
-
-
-if __name__ == '__main__':
-    pytest.main()

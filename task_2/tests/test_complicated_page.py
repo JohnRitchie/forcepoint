@@ -1,7 +1,6 @@
-import pytest
 from assertpy import assert_that
 import allure
-from helpers import HelperRandom
+from task_2.helpers import HelperRandom
 
 
 @allure.suite("Complicated Page")
@@ -20,6 +19,7 @@ class TestComplicatedPage:
         total_facebook_buttons = complicated_page.count_facebook_buttons()
         assert_that(total_facebook_buttons).is_greater_than(0)
 
+        # we can use soft_assertions: with soft_assertions():
         with allure.step("Verify all facebook button’s href equal to ‘https://www.facebook.com/Ultimateqa1/’ "
                          "in ‘Section of Social Media Follows’"):
             for i in range(total_facebook_buttons):
@@ -34,7 +34,3 @@ class TestComplicatedPage:
         success_message = complicated_page.get_success_message()
         with allure.step("Verify the message: 'Thanks for contacting us' is displayed after submitting the form"):
             assert_that(success_message).contains("Thanks for contacting us")
-
-
-if __name__ == '__main__':
-    pytest.main()

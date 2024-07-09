@@ -1,13 +1,23 @@
 import pytest
 from playwright.sync_api import sync_playwright
 import allure
-from pages.complicated_page import ComplicatedPage
+from task_2.pages.complicated_page import ComplicatedPage
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--headless",
+        action="store_true",
+        default=False,
+        help="Run tests in headless mode"
+    )
 
 
 @pytest.fixture(scope="session")
-def browser():
+def browser(pytestconfig):
+    headless = pytestconfig.getoption("--headless")
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=headless)
         yield browser
         browser.close()
 
